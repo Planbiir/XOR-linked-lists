@@ -1,49 +1,19 @@
 # XOR-linked-lists
 Проект выполнен в рамках учебного курса "Основы программирования".
 
-## Содержание
-### Типы
-| Название | Описание |
-| -------- | -------- |
-| list_t | Непрозрачный тип представления списка. Все функции данной библиотеки принимают либо возвращают указатели на переменные этого типа. Программист не должен самостоятельно изменять содержимое памяти, по этим адресам. |
-| lst_iter_t | Непрозрачный тип представления двунаправленных итераторов списка. Функции с префиксом `lst_iter_` принимают значения этого типа. |
-| lst_elem_t | Тип элементов, хранящихся в списке. Работоспособность этой библиотеки проверена исходя, что этот тип является целочисленным. **TODO**: организовать работу библиотки при общем типе. |
-
 ### Библиотека
 Библиотека предоставляет интерфейс для работы со списком. Реализации этих функций находится в файле [xlist.c](xlist.c)
 
 | Название | Описание | Ответсвенный | 
 | -------- | -------- | ------------ | 
-| [lst_new](#lst_new) | Создаёт новый список | const | [Гурьев](https://github.com/mymedia2/2list/commits?author=mymedia2) | Протестирована |
-| [lst_free](#lst_free) | Освобождает память, занимаемую списком | O(n) | [Гурьев](https://github.com/mymedia2/2list/commits?author=mymedia2) | Протестирована |
-| [lst_append](#lst_append) | Добавляет элемент в конец | const | [Макаровская](https://github.com/mymedia2/2list/commits?author=mnika1996) | Протестирована |
-| [lst_insert_before](#lst_insert_before) | Добавляет элемент перед тем, на который указывает итератор | const | [Табалин](https://github.com/mymedia2/2list/commits?author=Iluvmagick) | Не реализована |
-| lst_insert_range | Копирует в список элементы массива | O(n) | — | Запланирована |
-| lst_insert_list | Копирует в список элементы из другого списка | O(n) | — | Запланирована |
-| [lst_delete](#lst_delete) | Удаляет элемент, на который указывает итератор | const | [Копцева](https://github.com/mymedia2/2list/commits?author=Treenoga) | Не проходит тесты |
-| [lst_clear](#lst_clear) | Удаляет все элементы в списке | O(n) | [Копцева](https://github.com/mymedia2/2list/commits?author=Treenoga) | Протестирована |
-| lst_empty | Проверяет, не является ли список пустым | const | — | Запланирована |
-| [lst_size](#lst_size) | Вычисляет размер списка | O(n) | [Руденко](https://github.com/mymedia2/2list/commits?author=gr33n-made) | Протестирована |
-| [lst_index](#lst_index) | Возвращает элемент с заданным номером | O(n) | [Табалин](https://github.com/mymedia2/2list/commits?author=Iluvmagick) | Протестирована |
-| lst_repack | Переупаковывает список | O(n) | [Гурьев](https://github.com/mymedia2/2list/commits?author=mymedia2) | Нет тестов |
-### Алгоритмы
-Нижеследующие функции реализуют стандартные алгоритмы для нашего списка. Их реализации хранятся в файле [algorithm.c](algorithm.c).
+| [new_list](#lst_new) | Создаёт новый список | Пермяков |
+| [del_list](#lst_del) | Освобождает память, занимаемую списком | Сорока |
+| [addelem_end](#lst_addeleme) | Добавляет элемент в конец | Аксенов |
+| [addelem_begin](#lst_addelemb) | Добавляет элемент в начало | Аксенов |
+| [felem_list](#lst_find) | Находит элемент в списке | Аляев |
+| [symm_list](#lst_symm) | Печатает список | Шурыгин |
+| [print_list](#lst_print) | Печатает список | Шурыгин |
 
-| Название | Описание | Сложность | Ответсвенный | Готовность |
-| -------- | -------- | :-------: | ------------ | ---------- |
-| lst_binsearch | Выполняет биарный поиск | O(log n) | [Гурьев](https://github.com/mymedia2/2list/commits?author=mymedia2) | Отказались |
-| [lst_count](#lst_count) | Возвращает количество вхождений заданного значения | O(n) | [Чжун](https://github.com/mymedia2/2list/commits?author=russjungbok) | Протестирована |
-| [lst_copy](#lst_copy) | Возвращает копию списка | O(n) | [Макаровская](https://github.com/mymedia2/2list/commits?author=mnika1996) | Протестирована |
-| [lst_compare](#lst_compare) | Сравнивает два списка | O(n) | [Гурьев](https://github.com/mymedia2/2list/commits?author=mymedia2) | Не реализована |
-| [lst_find](#lst_find) | Возвращает итератор на первое вхождение значения | O(n) | [Табалин](https://github.com/mymedia2/2list/commits?author=Iluvmagick) | Протестирована |
-| [lst_for_each](#lst_for_each) | Замещает каждый элемент в списке результатом вызова функции | O(n) | [Гурьев](https://github.com/mymedia2/2list/commits?author=mymedia2) | Протестирована |
-| [lst_max](#lst_max) | Возвращает наибольшее значение из списка | O(n) | [Копцева](https://github.com/mymedia2/2list/commits?author=Treenoga) | Протестирована |
-| [lst_min](#lst_min) | Возвращает наименьшее значение из списка | O(n) | [Копцева](https://github.com/mymedia2/2list/commits?author=Treenoga) | Протестирована |
-| lst_random_shuffle | Переставляет элементы в случайном порядке | O(n) | [Руденко](https://github.com/mymedia2/2list/commits?author=gr33n-made) | Отказались |
-| [lst_replace](#lst_replace) | Заменяет все вхождения одного значения на другое | O(n) | [Чжун](https://github.com/mymedia2/2list/commits?author=russjungbok) | Протестирована |
-| [lst_remove](#lst_remove) | Удаляет из списка все вхождения заданного значения | O(n) | [Чжун](https://github.com/mymedia2/2list/commits?author=russjungbok) | Не реализована |
-| [lst_sort](#lst_sort) | Сортирует список | O(n log n) | [Руденко](https://github.com/mymedia2/2list/commits?author=gr33n-made) | Не реализована |
-| lst_swap | Обменивает два списка | const | [Макаровская](https://github.com/mymedia2/2list/commits?author=mnika1996) | Не реализована |
 ## Тесты
 В этом разделе содержатся описания работы всех функций из этой библиотеке. Ко многим из них преведены примеры их использования. Эти примеры одновременно являются и тестами. Чтобы запутить их, выполните команду `make` в каталоге с репозиторием. По этой команде запустится скрипт `./doctest.py`, который на основе данного файла сформирует код на Си, и скомпилирует его. Если все тесты будут пройдены,выводится соответствуещее сообщение, иначе будут показаны различия между выводом программы и приведёнными здесь результатами.
 
