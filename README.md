@@ -28,17 +28,26 @@
 Уничтожает список с двойным указателем на начало T и освобождает память. Обязательно вызывайте эту функцию перед выходом из программы.
 
 ### addelem_end
-`int lst_append(list_t* lst, lst_elem_t el)`
+`int addelem_end(struct xlist **T, int k)`
+
+Добавляет элемент k в конец списка по двойному указателю на его начало T, возвращает 0 в случае успешного выполнения и 1 в случае ошибки
 
 ### addelem_begin
-`int lst_insert_before(lst_iter_t it, lst_elem_t el)`
+`int addelem_begin(struct xlist **T, int k)`
+
+Добавляет элемент k в начало списка по двойному указателю на его начало T, возвращает 0 в случае успешного выполнения и 1 в случае ошибки
 
 ### felem_list
-`void lst_delete(lst_iter_t it)`
+`struct xlist *felem_list(struct xlist *T, int d)`
 
+Возвращает указатель на элемент d списка с указателем на начало Т, и NULL, если d в списке отсутствует
 
 ### symm_list
-`void lst_delete(lst_iter_t it)`
+`int symm_list(struct xlist *T)`
+
+Проверяет, симметричен ли список Т, возвращает 1 в этом случае и 0 в противном
 
 ### print_list
-`void lst_delete(lst_iter_t it)`
+`void print_list(struct xlist *T)`
+
+Принимает указатель на начало списка и выводит его элементы на экран
